@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Loja Mind</title>
+</head>
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="logo">Mind</div>
+  </header>
+
+ <div class="welcome-message" style="padding: 1rem; font-size: 1.2rem; font-weight: 600;">
+  Olá, <span id="username" style="color: var(--primary);">Usuário</span>! Seja bem-vindo(a)!
+</div>
+
+
+  <nav id="mobileMenu">
+    <a href="#">Masculino</a>
+    <a href="#">Feminino</a>
+    <a href="#">Ofertas</a>
+    <a href="#">Contato</a>
+  </nav>
+
+  <main>
+    <section class="products">
+  <div class="product on-sale">
+  <div class="product-image">Imagem não carregada</div>
+  <div class="product-info">
+    <div class="product-name">Colar</div>
+    <div class="product-price">
+      <span class="price-original">R$ 68,00</span>
+      <span class="price-discount">R$ 54,40</span>
+      <span class="discount-percent">(20% OFF)</span>
+    </div>
+  </div>
+</div>
+
+  <div class="product">
+    <div class="product-image">Imagem não carregada</div>
+    <div class="product-info">
+      <div class="product-name">Blusa Eagle</div>
+      <div class="product-price">R$ 40,00</div>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="product-image">Imagem não carregada</div>
+    <div class="product-info">
+      <div class="product-name">Blusão Mind.</div>
+      <div class="product-price">R$ 70,00</div>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="product-image">Imagem não carregada</div>
+    <div class="product-info">
+      <div class="product-name">Boné Giants</div>
+      <div class="product-price">R$ 35,00</div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('show');
+    }
+    function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('show');
+}
+
+  </script>
+</body>
+</html>

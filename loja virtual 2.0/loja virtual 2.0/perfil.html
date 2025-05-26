@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil do Usuário - Loja Mind</title>
+  <style>
+    :root {
+      --primary: #ECA80B;
+      --accent: #ECA80B;
+      --dark: #111;
+      --light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    header {
+      font-family: 'Gluten', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 1rem;
+      background-color: #6579D9;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 2rem;
+    }
+
+    header a {
+      position: absolute;
+      left: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--light);
+      transition: color 0.3s;
+    }
+
+    header a:hover {
+      color: #ddd;
+    }
+
+    header h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    main {
+      background-color: var(--light);
+      width: 100%;
+      max-width: 800px;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    .info-item {
+      background-color: #F9B233; /* fundo amarelo */
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--dark);
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    }
+
+    .info-item span {
+      font-weight: 400;
+    }
+
+    .btn-logout {
+      margin-top: 2rem;
+      background-color: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .btn-logout:hover {
+      background-color: #cc8700;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+      }
+      .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">← Voltar</a>
+    <h1>Perfil do Usuário</h1>
+  </header>
+
+  <main>
+    <h2>Informações do Usuário</h2>
+    <div class="user-info">
+      <div class="info-item">
+        Nome de usuário: <span id="perfil-usuario">Carregando...</span>
+      </div>
+      <div class="info-item">
+        E-mail: <span id="perfil-email">usuario@email.com</span>
+      </div>
+      <div class="info-item">
+        Telefone: <span id="perfil-telefone">(00) 00000-0000</span>
+      </div>
+      <div class="info-item">
+        Endereço: <span id="perfil-endereco">Rua Exemplo, 123 - Cidade</span>
+      </div>
+    </div>
+
+    <button class="btn-logout" id="btnLogout">Sair da conta</button>
+  </main>
+
+<script>
+  const usuarioLogado = localStorage.getItem('usuarioCadastrado');
+  if (!usuarioLogado) {
+    window.location.href = 'login.html';
+  } else {
+    const email = localStorage.getItem('emailCadastrado') || 'Não informado';
+    const telefone = localStorage.getItem('celularCadastrado') || 'Não informado';
+    const endereco = localStorage.getItem('enderecoCadastrado') || 'Não informado';
+
+    document.getElementById('perfil-usuario').textContent = usuarioLogado;
+    document.getElementById('perfil-email').textContent = email;
+    document.getElementById('perfil-telefone').textContent = telefone;
+    document.getElementById('perfil-endereco').textContent = endereco;
+  }
+
+  document.getElementById('btnLogout').addEventListener('click', () => {
+    localStorage.removeItem('usuarioCadastrado');
+    localStorage.removeItem('emailCadastrado');
+    localStorage.removeItem('celularCadastrado');
+    localStorage.removeItem('enderecoCadastrado');
+    window.location.href = 'login.html';
+  });
+</script>
+</body>
+</html>

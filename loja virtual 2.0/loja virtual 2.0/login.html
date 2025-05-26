@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="login-cadastro.css"/>
+  <title>Login - Mind</title>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" id="usuario" placeholder="Usuário" required />
+        <input type="password" id="senha" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+        <p class="link">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const usuario = document.getElementById('usuario').value;
+      const senha = document.getElementById('senha').value;
+
+      // (Opcional) Simulação de autenticação simples
+      // Se quiser validar contra um cadastro salvo, deve buscar no localStorage
+
+      if (usuario && senha) {
+        localStorage.setItem('usuarioLogado', usuario); // Salva o nome
+        window.location.href = 'index.html'; // Redireciona para a página inicial
+      } else {
+        alert('Usuário ou senha inválidos!');
+      }
+    });
+  </script>
+</body>
+</html>

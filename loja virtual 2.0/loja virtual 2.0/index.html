@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loja Mind</title>
+
+  <style>
+    :root {
+      --primary: #ECA80B;
+      --accent: #ECA80B;
+      --dark: #111;
+      --light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    header {
+      font-family: 'Gluten', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 1rem 0;
+      background-color: #6579D9;
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      color: var(--light);
+      user-select: none;
+      max-width: 1200px;
+    }
+
+    .menu-icon {
+      position: absolute;
+      left: 2rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--light);
+      user-select: none;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--primary);
+      user-select: none;
+    }
+
+    .welcome-message {
+      padding: 1rem 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 1.5rem;
+    }
+
+    #username {
+      color: var(--primary);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    nav {
+      background-color: #F9B233;
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      user-select: none;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: var(--dark);
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    nav a.active,
+    nav a:hover {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+
+    main {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 60vh;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product {
+      background-color: #eee;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+      box-shadow: 0 0 6px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+      min-height: 280px;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 14px rgb(0 0 0 / 0.15);
+    }
+
+    .product-image {
+      height: 160px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1.1rem;
+      font-style: italic;
+      user-select: none;
+    }
+
+    .product-info {
+      padding: 0.8rem 1.2rem;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      color: var(--dark);
+    }
+
+    .product-price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .price-original {
+      text-decoration: line-through;
+      color: #999;
+      margin-right: 0.5rem;
+      font-weight: 400;
+    }
+
+    .price-discount,
+    .discount-percent {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .product.on-sale .price-discount,
+    .product.on-sale .discount-percent {
+      color: green;
+    }
+
+    /* Seções (tabs) */
+    section.tab-section {
+      display: none;
+    }
+
+    section.tab-section.active {
+      display: block;
+    }
+
+    /* Responsivo */
+    @media (max-width: 700px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 1rem;
+      }
+      .products {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .product-image {
+        height: 140px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="logo">Mind</div>
+  </header>
+
+  <div class="welcome-message">
+    Olá, <a id="username" href="perfil.html">Usuário</a>! Seja bem-vindo(a)!
+  </div>
+
+  <nav id="mainNav">
+    <a id="tab-masculino" class="active" onclick="showTab('masculino')">Masculino</a>
+    <a id="tab-feminino" onclick="showTab('feminino')">Feminino</a>
+    <a id="tab-ofertas" onclick="showTab('ofertas')">Ofertas</a>
+    <a id="tab-contato" onclick="showTab('contato')">Contato</a>
+  </nav>
+
+  <main>
+    <!-- Masculino -->
+    <section id="masculino" class="tab-section active">
+      <h2>Seção Masculina</h2>
+      <div class="products">
+        <div class="product on-sale">
+          <div class="product-image">Camisa Social Azul</div>
+          <div class="product-info">
+            <div class="product-name">Camisa Social Azul</div>
+            <div class="product-price">
+              <span class="price-original">R$ 120,00</span>
+              <span class="price-discount">R$ 90,00</span>
+              <span class="discount-percent">(25% OFF)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Calça Jeans Escura</div>
+          <div class="product-info">
+            <div class="product-name">Calça Jeans Escura</div>
+            <div class="product-price">R$ 150,00</div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Jaqueta de Couro</div>
+          <div class="product-info">
+            <div class="product-name">Jaqueta de Couro</div>
+            <div class="product-price">R$ 300,00</div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Relógio Esportivo</div>
+          <div class="product-info">
+            <div class="product-name">Relógio Esportivo</div>
+            <div class="product-price">R$ 230,00</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feminino -->
+    <section id="feminino" class="tab-section">
+      <h2>Seção Feminina</h2>
+      <div class="products">
+        <div class="product on-sale">
+          <div class="product-image">Vestido Vermelho</div>
+          <div class="product-info">
+            <div class="product-name">Vestido Vermelho</div>
+            <div class="product-price">
+              <span class="price-original">R$ 140,00</span>
+              <span class="price-discount">R$ 105,00</span>
+              <span class="discount-percent">(25% OFF)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Blusa Floral</div>
+          <div class="product-info">
+            <div class="product-name">Blusa Floral</div>
+            <div class="product-price">R$ 85,00</div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Saia Plissada</div>
+          <div class="product-info">
+            <div class="product-name">Saia Plissada</div>
+            <div class="product-price">R$ 90,00</div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Bolsa de Couro</div>
+          <div class="product-info">
+            <div class="product-name">Bolsa de Couro</div>
+            <div class="product-price">R$ 250,00</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ofertas -->
+    <section id="ofertas" class="tab-section">
+      <h2>Ofertas Imperdíveis</h2>
+      <div class="products">
+        <div class="product on-sale">
+          <div class="product-image">Tênis Running</div>
+          <div class="product-info">
+            <div class="product-name">Tênis Running</div>
+            <div class="product-price">
+              <span class="price-original">R$ 180,00</span>
+              <span class="price-discount">R$ 135,00</span>
+              <span class="discount-percent">(25% OFF)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product on-sale">
+          <div class="product-image">Relógio Digital</div>
+          <div class="product-info">
+            <div class="product-name">Relógio Digital</div>
+            <div class="product-price">
+              <span class="price-original">R$ 200,00</span>
+              <span class="price-discount">R$ 150,00</span>
+              <span class="discount-percent">(25% OFF)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Jaqueta Jeans</div>
+          <div class="product-info">
+            <div class="product-name">Jaqueta Jeans</div>
+            <div class="product-price">R$ 180,00</div>
+          </div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">Blusa Unissex</div>
+          <div class="product-info">
+            <div class="product-name">Blusa Unissex</div>
+            <div class="product-price">R$ 70,00</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="tab-section">
+      <h2>Contato</h2>
+      <p>Fale conosco através dos canais abaixo:</p>
+      <ul>
+        <li>Email: suporte@lojamind.com</li>
+        <li>Telefone: (11) 99999-9999</li>
+        <li>WhatsApp: (11) 98888-8888</li>
+        <li>Endereço: Rua Exemplo, 123 - São Paulo, SP</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Alterna o menu mobile (simples toggle)
+    function toggleMenu() {
+      const menu = document.getElementById('mainNav');
+      menu.classList.toggle('show');
+    }
+
+    // Troca de abas
+    function showTab(tabId) {
+      // Remove classe active de todas as seções
+      document.querySelectorAll('.tab-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Remove classe active de todos os links
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Ativa a aba e o link clicado
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // Exibe nome do usuário vindo do localStorage
+    const usuarioLogado = localStorage.getItem('usuarioLogado');
+    if (!usuarioLogado) {
+      // window.location.href = 'login.html'; // redirecionar se não logado (descomente se quiser)
+      document.getElementById('username').textContent = 'Visitante';
+    } else {
+      document.getElementById('username').textContent = usuarioLogado;
+    }
+  </script>
+</body>
+</html>

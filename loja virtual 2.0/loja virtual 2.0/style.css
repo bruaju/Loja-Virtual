@@ -1,0 +1,166 @@
+@media (max-width: 600px) {
+  nav {
+    width: 80%;  /* menu lateral mais largo em telas pequenas */
+    height: 100vh; /* ocupa a altura toda */
+    border-radius: 0; /* sem bordas arredondadas */
+    padding-top: 70px; /* espaço para header */
+  }
+}
+
+ 
+ :root {
+      --primary: #ECA80B;
+      --accent: #ECA80B;
+      --dark: #111;
+      --light: #ffffffe7;
+
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+  background-color: var(--light);
+  color: var(--dark);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ header {
+  font-family: 'Gluten', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem;
+  background-color: #6579D9; /* cor atualizada */
+  border-bottom: 1px solid #ddd;
+}
+
+ .welcome-message {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#welcome-message #username {
+  color: var(--primary);
+}
+
+.menu-icon {
+  position: absolute;
+  font-size: 2rem;
+    left: 0.5rem;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+    nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #F9B233; /* cor do fundo */
+  position: fixed;  /* fixa na tela */         /* começa do topo */
+  left: 0;          /* cola na esquerda */
+  width: 30%;       /* ocupa 60% da largura da tela */
+  height: 90vh;     /* ocupa metade da altura da tela */
+  border-radius: 0 20px 20px; /* bordas arredondadas embaixo */
+  
+  opacity: 0;
+  transform: translateX(-100%); /* começa fora da tela, à esquerda */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+  padding-top: 60px; /* para não cobrir o header */
+}
+
+
+    nav a {
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--dark);
+  border-bottom: 1px solid var(--dark); /* mudou para linha preta */
+}
+
+
+    nav a:hover {
+      background-color: var(--primary);
+    }
+
+   
+nav.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+    .products {
+      display: grid;
+      grid-template-columns: 1fr; /* 1 coluna só no celular */
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .product {
+      background-color: #eee;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+
+    .product-image {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      background-color: #ddd;
+    }
+
+    .product-info {
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .product-price {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .price-original {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 0.5rem;
+}
+
+/* Por padrão, o preço com desconto e % ficam na cor do --accent */
+.price-discount,
+.discount-percent {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+/* Quando o produto estiver com desconto, usar verde */
+.product.on-sale .price-discount,
+.product.on-sale .discount-percent {
+  color: green;
+}
+
+
+

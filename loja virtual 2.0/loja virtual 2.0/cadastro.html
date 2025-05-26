@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro - Mind</title>
+  <style>
+    :root {
+      --primary: #ECA80B;
+      --dark: #111;
+      --light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-container {
+      background-color: #f9f9f9;
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    .auth-box form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .auth-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 6px var(--primary);
+    }
+
+    .auth-box button {
+      background-color: var(--primary);
+      color: var(--light);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .auth-box button:hover {
+      background-color: #d89200;
+    }
+
+    .auth-box .link {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .auth-box .link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-box .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2>Cadastro</h2>
+      <form id="cadastroForm">
+        <input type="text" id="novoUsuario" placeholder="Usuário" required />
+        <input type="password" id="novaSenha" placeholder="Senha" required />
+        <input type="email" id="novoEmail" placeholder="E-mail" required />
+        <input type="tel" id="novoCelular" placeholder="Celular (somente números)" pattern="\d{10,11}" inputmode="numeric" required />
+        <input type="text" id="novoEndereco" placeholder="Endereço" required />
+        <button type="submit">Cadastrar</button>
+        <p class="link">Já tem conta? <a href="login.html">Faça login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const usuario = document.getElementById('novoUsuario').value.trim();
+      const senha = document.getElementById('novaSenha').value.trim();
+      const email = document.getElementById('novoEmail').value.trim();
+      const celular = document.getElementById('novoCelular').value.trim();
+      const endereco = document.getElementById('novoEndereco').value.trim();
+
+      // Salvar os dados no localStorage (atenção: não é seguro para produção)
+      localStorage.setItem('usuarioCadastrado', usuario);
+      localStorage.setItem('senhaCadastrada', senha);
+      localStorage.setItem('emailCadastrado', email);
+      localStorage.setItem('celularCadastrado', celular);
+      localStorage.setItem('enderecoCadastrado', endereco);
+
+      alert('Cadastro realizado com sucesso!');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
